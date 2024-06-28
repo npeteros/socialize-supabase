@@ -17,7 +17,7 @@ export function LoginEmail() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm<FormValues>({
         resolver: zodResolver(signInSchema),
     });
@@ -27,7 +27,7 @@ export function LoginEmail() {
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         setError("");
         console.log("USER DATA: ", data);
-        
+
         const loggedUser = await signIn(data);
         if (loggedUser.status == 201) router.push("/");
         else setError(loggedUser.data);
@@ -67,8 +67,9 @@ export function LoginEmail() {
             </div>
             {error && <span className="text-xs text-red-500">{error}</span>}
             <button
+                disabled={isSubmitting}
                 type="submit"
-                className="flex items-center justify-center gap-4 rounded-lg bg-[#4CB4F8] py-2.5 text-sm font-bold text-white"
+                className={`flex items-center justify-center gap-4 rounded-lg py-2.5 text-sm font-bold text-white ${isSubmitting ? "bg-neutral-300" : "bg-[#4CB4F8]"}`}
             >
                 <svg
                     width="24"
