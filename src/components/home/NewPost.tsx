@@ -8,16 +8,18 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { PostForm, UserAvatar } from "@/components/MainComponents";
-import { Suspense } from "react";
+import { validateRequest } from "@/lib/data";
+import { redirect } from "next/navigation";
 
-export default function NewPost() {
+export default async function NewPost() {
+    const { user } = await validateRequest();
+    if (!user) return redirect("/login");   
+
     return (
         <Dialog>
             <div className="flex justify-between border-b border-neutral-700 px-6 py-4">
                 <div className="flex w-full items-center gap-4">
-                    <Suspense fallback={<p>Loading user...</p>}>
-                        <UserAvatar />
-                    </Suspense>
+                    <UserAvatar user={user} />
                     <DialogTrigger className="text-neutral-500">
                         Socialize...
                     </DialogTrigger>
@@ -33,7 +35,7 @@ export default function NewPost() {
                         What&apos;s on your mind?
                     </DialogDescription>
                 </DialogHeader>
-                <PostForm />
+                <PostForm user={user} />
                 <div className="mx-12 flex gap-4 text-neutral-500">
                     <button className="size-5">
                         <svg

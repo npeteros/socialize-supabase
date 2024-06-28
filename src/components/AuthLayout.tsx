@@ -1,13 +1,14 @@
-"use client";
-
 import { Sidebar } from "./MainComponents";
-import AuthLayoutSkeleton from "./skeletons/AuthLayoutSkeleton";
+import { validateRequest } from "@/lib/data";
+import { redirect } from "next/navigation";
 
-export default function AuthLayout({
+export default async function AuthLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const { user } = await validateRequest();
+    if (!user) return redirect("/login");    
 
     return (
         <div className="flex">

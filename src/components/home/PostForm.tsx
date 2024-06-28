@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 import UserAvatar from "./UserAvatar";
+import { User } from "lucia";
 
-export default function PostForm() {
+export default function PostForm({user}: {user: User}) {
     const [post, setPost] = useState("");
 
     return (
         <>
             <div className="flex items-center gap-4">
-                <UserAvatar />
+                <UserAvatar user={user} />
                 <div className="flex flex-col text-white">
                     <span>
-                        TestUser
-                        {/* {user?.displayName} */}
+                        {user?.displayName}
                     </span>
                     <input
                         type="text"

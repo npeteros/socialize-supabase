@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -14,21 +15,11 @@ export default function Menu() {
                     <button className="w-full rounded-t-xl p-2 hover:bg-neutral-600">
                         Settings
                     </button>
-                    <button
-                        onClick={() => {
-                            // signOut(auth)
-                            //     .then(() => {
-                            //         router.push("/login");
-                            //     })
-                            //     .catch((error) => {
-                            //         console.error("Error signing out: ", error);
-                                    
-                            //     });
-                        }}
-                        className="w-full rounded-b-xl p-2 hover:bg-neutral-600"
-                    >
-                        Sign Out
-                    </button>
+                    <form action={signOut} className="w-full">
+                        <button className="w-full rounded-b-xl p-2 hover:bg-neutral-600">
+                            Sign Out
+                        </button>
+                    </form>
                 </div>
             )}
             <button

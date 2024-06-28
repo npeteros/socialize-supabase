@@ -10,9 +10,9 @@ import UserAvatar from "./home/UserAvatar";
 
 /* Login */
 import LoginForm from "./auth/LoginForm";
+import RegisterForm from "./auth/RegisterForm"
 
 export {
-
     Sidebar,
     NavLink,
     Menu,
@@ -21,5 +21,6 @@ export {
     PostForm,
     UserAvatar,
 
-    LoginForm
+    LoginForm,
+    RegisterForm
 };
